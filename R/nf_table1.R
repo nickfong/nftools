@@ -7,7 +7,9 @@
 #' @return A table1 and p-value df
 #' @export
 nf_table1 <- function(columns, outcome, df, minmax=FALSE) {
-    p_value_df <- data.frame()
+    if(!exists('p_value_df')) {
+        p_value_df <- data.frame()
+    }
     for (column in columns) {
         temp <- data.frame(
             column_name = column,
