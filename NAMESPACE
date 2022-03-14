@@ -2,3 +2,4 @@
 
 export(nf_library)
 export(nf_pvalue)
+export(nf_table1)
