@@ -22,20 +22,19 @@ nf_forest_plot_broom <- function(df) {
                          exp(df$upper))
 
   df$term <- factor(df$term, levels=rev(df$term))
-  
+
   # Force the order of the terms from least to greatest OR
-  df <- df %>% arrange(estimate)
+  df <- dplyr::arrange(df, estimate)
   df$term <- factor(df$term, levels=rev(df$term))
 
-  forest_plot_exp <- ggplot(data=df, aes(x= term, y=exp_coef, ymin=exp_lower, ymax=exp_upper)) +
-    geom_pointrange() +
-  geom_hline(yintercept=1, lty=2) +  # add a dotted line at x=1 after flip
-    coord_flip() +  # flip coordinates (puts labels on y axis)
-    ylab("Odds Ratio (95% CI)") +
-    xlab("") +
-    theme_bw() + # use a white background
-    theme(axis.text.y = element_text(size = 15))
+  forest_plot_exp <- ggplot2::ggplot(data=df, aes(x=term, y=exp_coef, ymin=exp_lower, ymax=exp_upper)) +
+    ggplot2::geom_pointrange() +
+    ggplot2::geom_hline(yintercept=1, lty=2) +  # add a dotted line at x=1 after flip
+    ggplot2::coord_flip() +  # flip coordinates (puts labels on y axis)
+    ggplot2::ylab("Odds Ratio (95% CI)") +
+    ggplot2::xlab("") +
+    ggplot2::theme_bw() + # use a white background
+    ggplot2::theme(axis.text.y = ggplot2::element_text(size = 15))
   print(forest_plot_exp)
   return(forest_plot_exp)
 }
-
