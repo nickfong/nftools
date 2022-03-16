@@ -27,7 +27,7 @@ nf_forest_plot_broom <- function(df) {
   df <- dplyr::arrange(df, estimate)
   df$term <- factor(df$term, levels=rev(df$term))
 
-  forest_plot_exp <- ggplot2::ggplot(data=df, aes(x=term, y=exp_coef, ymin=exp_lower, ymax=exp_upper)) +
+  forest_plot_exp <- ggplot2::ggplot(data=df, ggplot2::aes(x=term, y=exp_coef, ymin=exp_lower, ymax=exp_upper)) +
     ggplot2::geom_pointrange() +
     ggplot2::geom_hline(yintercept=1, lty=2) +  # add a dotted line at x=1 after flip
     ggplot2::coord_flip() +  # flip coordinates (puts labels on y axis)
@@ -35,6 +35,15 @@ nf_forest_plot_broom <- function(df) {
     ggplot2::xlab("") +
     ggplot2::theme_bw() + # use a white background
     ggplot2::theme(axis.text.y = ggplot2::element_text(size = 15))
-  print(forest_plot_exp)
+    print(forest_plot_exp)
+
+    df$exp_coef <- round(df$exp_coef, 2)
+    df$exp_lower <- round(df$exp_lower, 2)
+    df$exp_upper <- round(df$exp_upper, 2)
+    df$p.value <- round(df$p.value, 3)
+
+    # Print out stats to copy and paste
+    cat(paste0(df$term, ' ', df$exp_coef, ' [', df$exp_lower, ', ', df$exp_upper, ']; p = ', df$p.value, '\n'))
+
   return(forest_plot_exp)
 }
