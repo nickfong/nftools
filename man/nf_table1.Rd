@@ -4,7 +4,7 @@
 \alias{nf_table1}
 \title{Create a table1 and p-values}
 \usage{
-nf_table1(columns, outcome, df, minmax = FALSE)
+nf_table1(columns, outcome, df, minmax = FALSE, reset_p_value_df = FALSE)
 }
 \arguments{
 \item{columns}{List of column names to include}

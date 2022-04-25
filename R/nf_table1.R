@@ -6,8 +6,8 @@
 #' @param outcome Outcome to stratify table by
 #' @return A table1 and p-value df
 #' @export
-nf_table1 <- function(columns, outcome, df, minmax=FALSE) {
-    if(!exists('p_value_df')) {
+nf_table1 <- function(columns, outcome, df, minmax=FALSE, reset_p_value_df=FALSE) {
+    if((reset_p_value_df) | (!exists('p_value_df'))) {
         p_value_df <- data.frame()
     }
     for (column in columns) {
