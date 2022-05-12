@@ -6,7 +6,7 @@
 #' @param outcome Outcome to stratify table by
 #' @return A table1 and p-value df
 #' @export
-nf_table1 <- function(columns, outcome, df, minmax=FALSE, reset_p_value_df=FALSE) {
+nf_table1 <- function(columns, outcome, df, minmax=FALSE, reset_p_value_df=FALSE, p_value_df_name='p_value_df') {
     if((reset_p_value_df) | (!exists('p_value_df'))) {
         p_value_df <- data.frame()
     }
@@ -18,7 +18,7 @@ nf_table1 <- function(columns, outcome, df, minmax=FALSE, reset_p_value_df=FALSE
         p_value_df <- rbind(p_value_df, temp)
     }
     # Hack to write p_value_df to global environment
-    assign('p_value_df', p_value_df, envir=.GlobalEnv)
+    assign(p_value_df_name, p_value_df, envir=.GlobalEnv)
 
     if(minmax) {
         return(table=table1::table1(
