@@ -10,7 +10,8 @@ nf_table1(
   df,
   minmax = FALSE,
   reset_p_value_df = FALSE,
-  p_value_df_name = "p_value_df"
+  p_value_df_name = "p_value_df",
+  calculate_pvalue = TRUE
 )
 }
 \arguments{
