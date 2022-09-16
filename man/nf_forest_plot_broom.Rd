@@ -4,7 +4,7 @@
 \alias{nf_forest_plot_broom}
 \title{Create a forest plot from the output of broom::tidy}
 \usage{
-nf_forest_plot_broom(df)
+nf_forest_plot_broom(df, title = NA, subtitle = NA)
 }
 \arguments{
 \item{a}{df that broom::tidy returns}

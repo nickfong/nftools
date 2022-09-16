@@ -5,7 +5,7 @@
 #' @param a df that broom::tidy returns
 #' @return a forest plot
 #' @export
-nf_forest_plot_broom <- function(df) {
+nf_forest_plot_broom <- function(df, title=NA, subtitle=NA) {
   df$lower <- df$estimate - 1.96*df$std.error
   df$upper <- df$estimate + 1.96*df$std.error
 
@@ -44,6 +44,13 @@ nf_forest_plot_broom <- function(df) {
 
     # Print out stats to copy and paste
     cat(paste0(df$term, ' ', df$exp_coef, ' [', df$exp_lower, ', ', df$exp_upper, ']; p = ', df$p.value, '\n'))
+
+  if(!is.na(title)) {
+    forest_plot_exp <- forest_plot_exp + ggplot2::ggtitle(title)
+  }
+  if(!is.na(subtitle)) {
+    forest_plot_exp <- forest_plot_exp + ggplot2::labs(title=title, subtitle=subtitle)
+  }
 
   return(forest_plot_exp)
 }
